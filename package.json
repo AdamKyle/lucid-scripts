@@ -1,0 +1,27 @@
+{
+  "name": "lucid-scripts",
+  "version": "0.0.1",
+  "description": "Scripts for Rpg Maker MV",
+  "main": "index.js",
+  "repository": "https://github.com/AdamKyle/lucid-scripts.git",
+  "author": "Adam Balan",
+  "license": "MIT",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint src/",
+    "webpack": "./node_modules/.bin/webpack",
+    "build:all": "eslint src && webpack -p --optimize-minimize",
+    "build:all:dev": "eslint src && webpack"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.22.0",
+    "eslint": "^2.13.1",
+    "eslint-config-google": "^0.5.0",
+    "eslint-plugin-header": "^0.1.0",
+    "webpack": "^2.1.0"
+  }
+}
