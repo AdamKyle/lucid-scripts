@@ -120,10 +120,12 @@ module.exports = class EventSpriteIcon extends Sprite {
     // Refresh the map to show all icons.
     $gameMap.requestRefresh();
 
+    // Always update the icon.
+    this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id);
+
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {
         $gamePlayer.actionIconTarget = this.eventIconDetails;
-        $gamePlayer.actionIconTarget = this.mapEventsIcons.getEventIcon($gamePlayer.actionIconTarget.event_id);
       }
     }
 
