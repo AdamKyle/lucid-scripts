@@ -9,10 +9,11 @@ const MapEventsIcons = require('./map_events_icons');
  */
 module.exports = class EventSpriteIcon extends Sprite {
 
-  constructor(eventIcon) {
+  constructor(mapEventsIcons, eventIcon) {
     super();
 
     this.eventIconDetails = eventIcon;
+    this.mapEventsIcons = mapEventsIcons;
   }
 
   /**
@@ -95,7 +96,7 @@ module.exports = class EventSpriteIcon extends Sprite {
    */
   updateOpacity() {
     if ($gameMap.isEventRunning() && $gameMap._interpreter.eventId() === this.eventIconDetails.event_id) {
-      this.opacity -= 40
+      this.opacity -= 40;
     } else {
       this.opacity = 255;
     }
@@ -115,11 +116,14 @@ module.exports = class EventSpriteIcon extends Sprite {
    */
   update() {
     super.update.call(this);
+
+    // Refresh the map to show all icons.
     $gameMap.requestRefresh();
 
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {
-        $gamePlayer.actionIconTarget = this.eventIconDetails
+        $gamePlayer.actionIconTarget = this.eventIconDetails;
+        $gamePlayer.actionIconTarget = this.mapEventsIcons.getEventIcon($gamePlayer.actionIconTarget.event_id);
       }
     }
 

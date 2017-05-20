@@ -16,7 +16,7 @@ const MapEventsIcons  = require('./map_events_icons');
 window.lucidScripts = window.lucidScripts || {};
 
 // Used to refresh the event icon.
-lucidScripts.lucidEventIcon = { needRefresh: false };
+lucidScripts.lucidEventIcon = { needRefresh: false, recreateMapIcons: false};
 
 // Self executing Function
 (() => {
@@ -57,7 +57,7 @@ lucidScripts.lucidEventIcon = { needRefresh: false };
     let mapEventsIcons = new MapEventsIcons();
 
     mapEventsIcons.getAllEventIcons().forEach(function(eventIcon) {
-      this['_eventiconSprite_' + eventIcon.event_id] = new EventSpriteIcon(eventIcon);
+      this['_eventiconSprite_' + eventIcon.event_id] = new EventSpriteIcon(mapEventsIcons, eventIcon);
       this._tilemap.addChild(this['_eventiconSprite_' + eventIcon.event_id]);
     }, this);
   };
