@@ -33,6 +33,8 @@ lucidScripts.lucidEventIcon = { needRefresh: false };
   /**
    * Instantiate a new class which sets either true or false for
    * refreshing the icon.
+   *
+   * @param {number} mapId - the map id
    */
   var LucidEventIcon_Game_System_requestRefresh = Game_Map.prototype.requestRefresh;
   Game_Map.prototype.requestRefresh = function(mapId) {
@@ -46,16 +48,17 @@ lucidScripts.lucidEventIcon = { needRefresh: false };
     this.createActionIconSprite();
   };
 
+  /**
+   * New function on the Spriteset_Map class to create the icon sprites.
+   *
+   * @return {undefined} nothing
+   */
   Spriteset_Map.prototype.createActionIconSprite = function() {
-    var mapEventsIcons = new MapEventsIcons();
+    let mapEventsIcons = new MapEventsIcons();
 
     mapEventsIcons.getAllEventIcons().forEach(function(eventIcon) {
       this['_eventiconSprite_' + eventIcon.event_id] = new EventSpriteIcon(eventIcon);
       this._tilemap.addChild(this['_eventiconSprite_' + eventIcon.event_id]);
-      console.log(this._tilemap, this._tilemap.children);
-    }, this)
-
-    this._eventIconSprite = new EventSpriteIcon();
-    this._tilemap.addChild(this._eventIconSprite);
+    }, this);
   };
 })();

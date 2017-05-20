@@ -1,5 +1,12 @@
 const MapEventsIcons = require('./map_events_icons');
 
+/**
+ * Event prite Icon.
+ *
+ * Responsible for creating the icon above the event.
+ *
+ * Sprite is apart of Rpg Maker MV Library.
+ */
 module.exports = class EventSpriteIcon extends Sprite {
 
   constructor(eventIcon) {
@@ -8,29 +15,47 @@ module.exports = class EventSpriteIcon extends Sprite {
     this.eventIconDetails = eventIcon;
   }
 
+  /**
+   * Called when the class is regsitered.
+   *
+   * We also make call to the Sprite initialize method.
+   *
+   * @return {undefined} - nothing
+   */
   initialize() {
-    Sprite.prototype.initialize.call(this);
+    super.initialize.call(this);
 
     $gamePlayer.actionIconTarget = $gamePlayer.actionIconTarget || {event_id: 0, icon_id: 0};
 
     this._iconIndex = 0;
-    this.z = 0;
+    this.z = 100;
 
     this.changeBitmap($gamePlayer.actionIconTarget);
 
     this._tileWidth = $gameMap.tileWidth();
     this._tileHeight = $gameMap.tileHeight();
     this._offsetX = -(Window_Base._iconWidth / 2);
-    this._offsetY = -38 + 0;
+    this._offsetY = -38;
     this.anchor.y = 1;
     this._float = 0.1;
-    this.mod = 2;
+    this.mod = 0.2;
 
     this.mapEventsIcons = new MapEventsIcons();
 
     lucidScripts.lucidEventIcon.needRefresh = true;
   }
 
+  /**
+   * Creates the actual icon object baed on the id of the icon.
+   *
+   * When you call: <eventIcon: 7> we then create an icon that
+   * references id 7 of the list of icons.
+   *
+   * This icon is then placed above the event.
+   *
+   * @param {object} eventIconObject object: {event_id: id, icon_id: id}
+   * @return {undefined} - null
+   */
   changeBitmap(eventIconObject) {
     if (eventIconObject.event_id <= 0) {
       this._iconIndex = 0;
@@ -59,16 +84,38 @@ module.exports = class EventSpriteIcon extends Sprite {
     lucidScripts.lucidEventIcon.needRefresh = false;
   }
 
+  /**
+   * If the event in question is running, we make the icon dissapear.
+   *
+   * If the event is not running, we display the icon.
+   *
+   * This allows us to have multiple events on the same scene with different icons.
+   *
+   * @return {undefined} - nothing
+   */
   updateOpacity() {
-    if ($gameMap.isEventRunning()) {
-      this.opacity -= 40;
+    if ($gameMap.isEventRunning() && $gameMap._interpreter.eventId() === this.eventIconDetails.event_id) {
+      this.opacity -= 40
     } else {
       this.opacity = 255;
     }
   }
 
+  /**
+   * Common update method. Run every tick.
+   *
+   * To display all event icons we call: $gameMap.requestRefresh()
+   *
+   * This allows all icons to be displayed on the map over all events.
+   *
+   * We build and update any icons that are either showing or not showing
+   * and position the icon above the appropriate event.
+   *
+   * @return{undefined} - nothing
+   */
   update() {
-    Sprite.prototype.update.call(this);
+    super.update.call(this);
+    $gameMap.requestRefresh();
 
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {

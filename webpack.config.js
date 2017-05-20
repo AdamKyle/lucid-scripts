@@ -6,7 +6,7 @@ module.exports = {
     lucidEventIcon: './src/lucid/event/icon.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
   },
   target: 'web',
