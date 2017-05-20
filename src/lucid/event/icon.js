@@ -2,6 +2,18 @@
  * @plugindesc Allow an event to have an icon hovering over it.
  *
  * @author Adam Balan
+ *
+ * @help
+ *
+ * Place: <eventIcon: icon_id> in a comment on a page for an event.
+ *
+ * When the event is being interacted with, the event will make the icon
+ * lose its opacity. If the page changes and there is a new <eventIcon: icon_id>
+ * on that new page, once the event is done being interacted with the icon will
+ * appear and change.
+ *
+ * If the page changes and there is no <eventIcon: icon_id>, the icon will
+ * disapear from the event.
  */
 
 const EventSpriteIcon = require('./event_sprite_icon');
