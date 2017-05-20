@@ -38,4 +38,32 @@ module.exports = class MapEventsIcons {
 
     return eventIconObjects;
   }
+
+  /**
+   * Get a specific events Icon.
+   *
+   * Will return a object with an icon_id of 0
+   * if we cannot find one. this symbolizes no icon.
+   *
+   * @param {number} eventId - The if od the event.
+   * @return {object} {event_id: x, icon_id: 0} || {event_id: x, icon_id: y}
+   */
+  getEventIcon(eventId) {
+    const event = $gameMap.event(eventId);
+    const eventPageCount = event.page().list.length;
+
+    for (let i = 0; i < eventPageCount; i++) {
+      if (event.page().list[i].code === 108) {
+        let icon = event.page().list[i].parameters[0].match(/<eventIcon: (.*)>/i);
+
+        if (icon) {
+          return { event_id: event._eventId, icon_id: Number(icon[1]) };
+        } else {
+          return { event_id: event._eventId, icon_id: 0 }
+        }
+      } else {
+        return { event_id: event._eventId, icon_id: 0 }
+      }
+    }
+  }
 }
