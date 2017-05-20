@@ -9,7 +9,7 @@
   "scripts": {
     "eslint": "./node_modules/.bin/eslint src/",
     "webpack": "./node_modules/.bin/webpack",
-    "build:all": "eslint src && webpack -p --optimize-minimize && cp ./build/* dist/* && rm -rf build/*",
+    "build:all": "eslint src && webpack -p --optimize-minimize && cp ./build/* dist/ && rm -rf build/*",
     "build:all:dev": "eslint src && webpack"
   },
   "devDependencies": {
