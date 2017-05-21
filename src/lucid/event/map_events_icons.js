@@ -50,6 +50,11 @@ module.exports = class MapEventsIcons {
    */
   getEventIcon(eventId) {
     const event = $gameMap.event(eventId);
+
+    // if (event === undefined) {
+    //   return {event_id: 0, icon_id: 0};
+    // }
+
     const eventPageCount = event.page().list.length;
 
     for (let i = 0; i < eventPageCount; i++) {
