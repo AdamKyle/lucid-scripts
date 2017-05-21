@@ -9,7 +9,7 @@
   "scripts": {
     "eslint": "./node_modules/.bin/eslint ./src",
     "webpack": "./node_modules/.bin/webpack",
-    "build:all": "eslint src && webpack -p --optimize-minimize && cp ./build/* dist/ && rm -rf build/*",
+    "build:all": "eslint src && webpack && cp ./build/* dist/ && rm -rf build/*",
     "build:all:dev": "eslint src && webpack"
   },
   "devDependencies": {
@@ -23,6 +23,8 @@
     "eslint-config-google": "^0.5.0",
     "eslint-plugin-header": "^0.1.0",
     "rmmv-mrp-core": "^0.0.15",
+    "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
+    "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "^2.1.0"
   }
 }
