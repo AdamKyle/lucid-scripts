@@ -1,3 +1,5 @@
+const extractAll = require('rmmv-mrp-core/option-parser').extractAll;
+
 /**
  * Process all event icons on the map.
  *
@@ -22,13 +24,13 @@ module.exports = class MapEventsIcons {
           // If the event code is a comment.
           if (event.page().list[i].code === 108) {
             // get the icon assuming there is a tag that matches:
-            let icon = event.page().list[i].parameters[0].match(/<eventIcon: (.*)>/i);
+            const iconEventInfo = extractAll(event.page().list[i].parameters[0]);
 
-            if (icon) {
+            if (iconEventInfo.length > 0) {
               // Create the icon object with event id and icon id.
               eventIconObjects.push({
-                event_id: event._eventId,
-                icon_id: Number(icon[1])
+                event_id: iconEventInfo[0].event || event._eventId,
+                icon_id: Number(iconEventInfo[0].icon)
               });
             }
           }
@@ -59,10 +61,11 @@ module.exports = class MapEventsIcons {
 
     for (let i = 0; i < eventPageCount; i++) {
       if (event.page().list[i].code === 108) {
-        let icon = event.page().list[i].parameters[0].match(/<eventIcon: (.*)>/i);
 
-        if (icon) {
-          return { event_id: event._eventId, icon_id: Number(icon[1]) };
+        let iconEventInfo = extractAll(event.page().list[i].parameters[0]);
+
+        if (iconEventInfo.length > 0) {
+          return { event_id: event._eventId, icon_id: Number(iconEventInfo[0].icon) };
         } else {
           return { event_id: event._eventId, icon_id: 0 }
         }
