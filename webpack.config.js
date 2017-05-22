@@ -5,6 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   entry: {
     lucidEventIcon: './src/lucid/event/icon.js',
+    lucidStates: './src/lucid/states/states.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),

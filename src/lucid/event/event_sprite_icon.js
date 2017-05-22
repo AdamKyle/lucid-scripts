@@ -113,19 +113,11 @@ module.exports = class EventSpriteIcon extends Sprite {
   update() {
     super.update.call(this);
 
-<<<<<<< HEAD
-    // Refresh the map to show all icons.
-    $gameMap.requestRefresh();
-
-    // Always update the icon.
-    this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id);
-=======
     // Always update the icon.
     this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id);
 
     // Refresh the map to show all icons.
     $gameMap.requestRefresh();
->>>>>>> b61f4e24e4bb97491a1ec3688c057284de885754
 
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {

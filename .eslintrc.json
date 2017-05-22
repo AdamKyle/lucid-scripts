@@ -21,7 +21,7 @@
     "eqeqeq": 2,
     "no-empty-function": 1,
     "max-lines": [2, {"max": 180}],
-    "max-nested-callbacks": [2, {"max": 2}],
+    "max-nested-callbacks": [2, {"max": 3}],
     "max-params": [2, {"max": 4}],
     "no-undef": 0
   }
