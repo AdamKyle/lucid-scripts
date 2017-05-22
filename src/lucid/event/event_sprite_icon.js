@@ -64,10 +64,6 @@ module.exports = class EventSpriteIcon extends Sprite {
       this._iconIndex = eventIconObject.icon_id;
     }
 
-    if (this._iconIndex <= 0) {
-      return;
-    }
-
     const pw = Window_Base._iconWidth;
     const ph = Window_Base._iconHeight;
     const sx = this._iconIndex % 16 * pw;
@@ -117,11 +113,19 @@ module.exports = class EventSpriteIcon extends Sprite {
   update() {
     super.update.call(this);
 
+<<<<<<< HEAD
     // Refresh the map to show all icons.
     $gameMap.requestRefresh();
 
     // Always update the icon.
     this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id);
+=======
+    // Always update the icon.
+    this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id);
+
+    // Refresh the map to show all icons.
+    $gameMap.requestRefresh();
+>>>>>>> b61f4e24e4bb97491a1ec3688c057284de885754
 
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {
@@ -129,6 +133,7 @@ module.exports = class EventSpriteIcon extends Sprite {
       }
     }
 
+    //console.log(this._iconIndex, $gamePlayer.actionIconTarget.icon_id);
     if (this._iconIndex !== $gamePlayer.actionIconTarget.icon_id) {
       this.changeBitmap($gamePlayer.actionIconTarget);
     }
