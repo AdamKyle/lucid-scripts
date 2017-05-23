@@ -1,8 +1,9 @@
 const extractAll = require('rmmv-mrp-core/option-parser').extractAll;
+const getParamId = require('./helpers/get_param_id').getParamId;
 
 module.exports = class ProcessState {
 
-  getStateNoteObject(state) {
+  getStateNoteObjects(state) {
     const stateInformation = extractAll(state.note);
     let stateObjects = [];
 
@@ -13,44 +14,46 @@ module.exports = class ProcessState {
     stateInformation.forEach(function(stateInfo) {
       stateObjects.push({
         stat: stateInfo.stat,
-        amount: stateInfo.amount
+        amount: stateInfo.amount,
+        action: stateInfo.action
       });
     });
 
     return stateObjects;
   }
 
-  setOriginalActorInfo(stateObjects, actor) {
-    if (lucidScripts.lucidStates.length > 0) {
-      lucidScripts.lucidStates.forEach(function(lucidState){
-        if (actor._actorId === lucidState.actorId) {
 
-          lucidState.originalStatInfo.forEach(function(statInfo){
-            stateObjects.forEach(function(stateInfo){
-              if (statInfo.stat !== stateInfo.stat) {
-                lucidState.originalStatInfo.push({
-                  stat: stateInfo.stat,
-                  value: actor[stateInfo.stat]
-                });
-              }
-            });
-          });
-        }
-      });
-    } else {
-      stateObjects.forEach(function(stateInfo) {
-        lucidScripts.lucidStates.push({
-          actorId: actor._actorId,
-          originalStatInfo: [{
-            stat: stateInfo.stat,
-            value: actor[stateInfo.stat]
-          }]
-        });
-      });
-    }
+
+  applyStatChanges(stateObjects, actor) {
+    stateObjects.forEach(function(stateInfo) {
+      paramId = getParamId(stateInfo.stat);
+      let newValue = 0;
+
+      if (stateInfo.action === 'increase') {
+        newValue = actor.param(paramId) * (1 + (stateInfo.amount / 100));
+        actor.addParam(paramId, Math.round(newValue - actor.param(paramId)));
+      } else if (stateInfo.action === 'decrease') {
+        newValue = actor.param(paramId) * (1 - (stateInfo.amount / 100));
+        actor.subtractParam(paramId, Math.round(newValue - actor.param(paramId)));
+      } else {
+        throw Error('type for the tag param must be increase or decrease.');
+      }
+    });
   }
 
-  ApplyStatChanges(stateInfo, actor) {
-    
+  removeStateChanges(stateObjects, actor) {
+    stateObjects.forEach(function(stateInfo) {
+      paramId = getParamId(stateInfo.stat);
+
+      if (stateInfo.action === 'increase') {
+        newValue = actor.param(paramId) * (1 - (stateInfo.amount / 100));
+        actor.subtractParam(paramId, Math.round(newValue - actor.param(paramId)));
+      } else if (stateInfo.action === 'decrease') {
+        newValue = actor.param(paramId) * (1 + (stateInfo.amount / 100));
+        actor.addParam(paramId, Math.round(newValue - actor.param(paramId)));
+      } else {
+        throw Error('type for the tag param must be increase or decrease.');
+      }
+    });
   }
 }
