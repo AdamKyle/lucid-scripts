@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-!function(e){function t(i){if(n[i])return n[i].exports;var o=n[i]={i:i,l:!1,exports:{}};return e[i].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=2)}([function(e,t){function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}();e.exports=function(){function e(){n(this,e)}return i(e,[{key:"getAllEventIcons",value:function(){var e=[];return $gameMap._events.forEach(function(t){if(void 0!==t)for(var n=t.page().list.length,i=0;i<n;i++)if(108===t.page().list[i].code){var o=t.page().list[i].parameters[0].match(/<eventIcon: (.*)>/i);o&&e.push({event_id:t._eventId,icon_id:Number(o[1])})}}),e}},{key:"getEventIcon",value:function(e){for(var t=$gameMap.event(e),n=t.page().list.length,i=0;i<n;i++){if(108===t.page().list[i].code){var o=t.page().list[i].parameters[0].match(/<eventIcon: (.*)>/i);return o?{event_id:t._eventId,icon_id:Number(o[1])}:{event_id:t._eventId,icon_id:0}}return{event_id:t._eventId,icon_id:0}}}}]),e}()},function(e,t,n){function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function r(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var a=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),c=function e(t,n,i){null===t&&(t=Function.prototype);var o=Object.getOwnPropertyDescriptor(t,n);if(void 0===o){var r=Object.getPrototypeOf(t);return null===r?void 0:e(r,n,i)}if("value"in o)return o.value;var a=o.get;if(void 0!==a)return a.call(i)},s=n(0);e.exports=function(e){function t(e,n){i(this,t);var r=o(this,(t.__proto__||Object.getPrototypeOf(t)).call(this));return r.eventIconDetails=n,r.mapEventsIcons=e,r}return r(t,e),a(t,[{key:"initialize",value:function(){c(t.prototype.__proto__||Object.getPrototypeOf(t.prototype),"initialize",this).call(this),$gamePlayer.actionIconTarget=$gamePlayer.actionIconTarget||{event_id:0,icon_id:0},this._iconIndex=0,this.z=100,this.changeBitmap($gamePlayer.actionIconTarget),this._tileWidth=$gameMap.tileWidth(),this._tileHeight=$gameMap.tileHeight(),this._offsetX=-Window_Base._iconWidth/2,this._offsetY=-38,this.anchor.y=1,this._float=.1,this.mod=.2,this.mapEventsIcons=new s,lucidScripts.lucidEventIcon.needRefresh=!0}},{key:"changeBitmap",value:function(e){if(e.event_id<=0?this._iconIndex=0:this._iconIndex=e.icon_id,!(this._iconIndex<=0)){var t=Window_Base._iconWidth,n=Window_Base._iconHeight,i=this._iconIndex%16*t,o=Math.floor(this._iconIndex/16)*n,r=ImageManager.loadSystem("IconSet");this.bitmap=new Bitmap(t,n),this.bitmap.blt(r,i,o,t,n,0,0),this.scale.y=.1,this.opacity=0,this.mod=.2,this._float=.1,lucidScripts.lucidEventIcon.needRefresh=!1}}},{key:"updateOpacity",value:function(){$gameMap.isEventRunning()&&$gameMap._interpreter.eventId()===this.eventIconDetails.event_id?this.opacity-=40:this.opacity=255}},{key:"update",value:function(){c(t.prototype.__proto__||Object.getPrototypeOf(t.prototype),"update",this).call(this),$gameMap.requestRefresh(),this.eventIconDetails=this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id),lucidScripts.lucidEventIcon.needRefresh&&void 0!==this.eventIconDetails&&($gamePlayer.actionIconTarget=this.eventIconDetails),this._iconIndex!==$gamePlayer.actionIconTarget.icon_id&&this.changeBitmap($gamePlayer.actionIconTarget),this._iconIndex<=0||(this.x=$gameMap.event($gamePlayer.actionIconTarget.event_id).screenX()+this._offsetX,this.y=$gameMap.event($gamePlayer.actionIconTarget.event_id).screenY()+this._offsetY+this._float,this.scale.y=Math.min(this.scale.y+.1,1),this.updateOpacity(),this._float+=this.mod,this._float<-.1?this.mod=Math.min(this.mod+.01,.2):this._float>=.1&&(this.mod=Math.max(this.mod+-.01,-.2)))}}]),t}(Sprite)},function(e,t,n){var i=n(1),o=n(0);window.lucidScripts=window.lucidScripts||{},lucidScripts.lucidEventIcon={needRefresh:!1,recreateMapIcons:!1},function(){var e=Game_System.prototype.initialize;Game_System.prototype.initialize=function(){e.call(this),lucidScripts.lucidEventIcon.needRefresh=!0};var t=Game_Map.prototype.requestRefresh;Game_Map.prototype.requestRefresh=function(e){t.call(this,e),lucidScripts.lucidEventIcon.needRefresh=!0};var n=Spriteset_Map.prototype.createLowerLayer;Spriteset_Map.prototype.createLowerLayer=function(){n.call(this),this.createActionIconSprite()},Spriteset_Map.prototype.createActionIconSprite=function(){var e=new o;e.getAllEventIcons().forEach(function(t){this["_eventiconSprite_"+t.event_id]=new i(e,t),this._tilemap.addChild(this["_eventiconSprite_"+t.event_id])},this)}}()}]);
-=======
 /******/ !function(e) {
     /******/
     /******/
@@ -103,250 +100,8 @@
     /******/
     // __webpack_public_path__
     /******/
-    t.p = "", t(t.s = 2);
+    t.p = "", t(t.s = 5);
 }([ /* 0 */
-/***/
-function(e, t, n) {
-    function r(e, t) {
-        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-    }
-    var o = function() {
-        function e(e, t) {
-            for (var n = 0; n < t.length; n++) {
-                var r = t[n];
-                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), 
-                Object.defineProperty(e, r.key, r);
-            }
-        }
-        return function(t, n, r) {
-            return n && e(t.prototype, n), r && e(t, r), t;
-        };
-    }(), i = n(3).extractAll;
-    /**
- * Process all event icons on the map.
- *
- */
-    e.exports = function() {
-        function e() {
-            r(this, e);
-        }
-        return o(e, [ {
-            key: "getAllEventIcons",
-            /**
-     * Responsible for getting all event icons for a given map and all its events.
-     *
-     * @return {array} - array of objects.
-     */
-            value: function() {
-                var e = [];
-                // Loop over the events.
-                return $gameMap._events.forEach(function(t) {
-                    if (void 0 !== t) // Loop over the event page count
-                    for (var n = t.page().list.length, r = 0; r < n; r++) // If the event code is a comment.
-                    if (108 === t.page().list[r].code) {
-                        // get the icon assuming there is a tag that matches:
-                        var o = i(t.page().list[r].parameters[0]);
-                        o.length > 0 && // Create the icon object with event id and icon id.
-                        e.push({
-                            event_id: o[0].event || t._eventId,
-                            icon_id: Number(o[0].icon)
-                        });
-                    }
-                }), e;
-            }
-        }, {
-            key: "getEventIcon",
-            value: function(e) {
-                for (var t = $gameMap.event(e), n = t.page().list.length, r = 0; r < n; r++) {
-                    if (108 === t.page().list[r].code) {
-                        var o = i(t.page().list[r].parameters[0]);
-                        return o.length > 0 ? {
-                            event_id: t._eventId,
-                            icon_id: Number(o[0].icon)
-                        } : {
-                            event_id: t._eventId,
-                            icon_id: 0
-                        };
-                    }
-                    return {
-                        event_id: t._eventId,
-                        icon_id: 0
-                    };
-                }
-            }
-        } ]), e;
-    }();
-}, /* 1 */
-/***/
-function(e, t, n) {
-    function r(e, t) {
-        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-    }
-    function o(e, t) {
-        if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-        return !t || "object" != typeof t && "function" != typeof t ? e : t;
-    }
-    function i(e, t) {
-        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-        e.prototype = Object.create(t && t.prototype, {
-            constructor: {
-                value: e,
-                enumerable: !1,
-                writable: !0,
-                configurable: !0
-            }
-        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-    }
-    var a = function() {
-        function e(e, t) {
-            for (var n = 0; n < t.length; n++) {
-                var r = t[n];
-                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), 
-                Object.defineProperty(e, r.key, r);
-            }
-        }
-        return function(t, n, r) {
-            return n && e(t.prototype, n), r && e(t, r), t;
-        };
-    }(), c = function e(t, n, r) {
-        null === t && (t = Function.prototype);
-        var o = Object.getOwnPropertyDescriptor(t, n);
-        if (void 0 === o) {
-            var i = Object.getPrototypeOf(t);
-            return null === i ? void 0 : e(i, n, r);
-        }
-        if ("value" in o) return o.value;
-        var a = o.get;
-        if (void 0 !== a) return a.call(r);
-    }, u = n(0);
-    /**
- * Event prite Icon.
- *
- * Responsible for creating the icon above the event.
- *
- * Sprite is apart of Rpg Maker MV Library.
- */
-    e.exports = function(e) {
-        function t(e, n) {
-            r(this, t);
-            var i = o(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this));
-            return i.eventIconDetails = n, i.mapEventsIcons = e, i;
-        }
-        /**
-   * Called when the class is regsitered.
-   *
-   * We also make call to the Sprite initialize method.
-   *
-   * @return {undefined} - nothing
-   */
-        return i(t, e), a(t, [ {
-            key: "initialize",
-            value: function() {
-                c(t.prototype.__proto__ || Object.getPrototypeOf(t.prototype), "initialize", this).call(this), 
-                $gamePlayer.actionIconTarget = $gamePlayer.actionIconTarget || {
-                    event_id: 0,
-                    icon_id: 0
-                }, this._iconIndex = 0, this.z = 100, this.changeBitmap($gamePlayer.actionIconTarget), 
-                this._tileWidth = $gameMap.tileWidth(), this._tileHeight = $gameMap.tileHeight(), 
-                this._offsetX = -Window_Base._iconWidth / 2, this._offsetY = -38, this.anchor.y = 1, 
-                this._float = .1, this.mod = .2, this.mapEventsIcons = new u(), lucidScripts.lucidEventIcon.needRefresh = !0;
-            }
-        }, {
-            key: "changeBitmap",
-            value: function(e) {
-                e.event_id <= 0 ? this._iconIndex = 0 : this._iconIndex = e.icon_id;
-                var t = Window_Base._iconWidth, n = Window_Base._iconHeight, r = this._iconIndex % 16 * t, o = Math.floor(this._iconIndex / 16) * n, i = ImageManager.loadSystem("IconSet");
-                this.bitmap = new Bitmap(t, n), this.bitmap.blt(i, r, o, t, n, 0, 0), this.scale.y = .1, 
-                this.opacity = 0, this.mod = .2, this._float = .1, lucidScripts.lucidEventIcon.needRefresh = !1;
-            }
-        }, {
-            key: "updateOpacity",
-            value: function() {
-                $gameMap.isEventRunning() && $gameMap._interpreter.eventId() === this.eventIconDetails.event_id ? this.opacity -= 40 : this.opacity = 255;
-            }
-        }, {
-            key: "update",
-            value: function() {
-                c(t.prototype.__proto__ || Object.getPrototypeOf(t.prototype), "update", this).call(this), 
-                // Always update the icon.
-                this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id), 
-                // Refresh the map to show all icons.
-                $gameMap.requestRefresh(), lucidScripts.lucidEventIcon.needRefresh && void 0 !== this.eventIconDetails && ($gamePlayer.actionIconTarget = this.eventIconDetails), 
-                //console.log(this._iconIndex, $gamePlayer.actionIconTarget.icon_id);
-                this._iconIndex !== $gamePlayer.actionIconTarget.icon_id && this.changeBitmap($gamePlayer.actionIconTarget), 
-                this._iconIndex <= 0 || (this.x = $gameMap.event($gamePlayer.actionIconTarget.event_id).screenX() + this._offsetX, 
-                this.y = $gameMap.event($gamePlayer.actionIconTarget.event_id).screenY() + this._offsetY + this._float, 
-                this.scale.y = Math.min(this.scale.y + .1, 1), this.updateOpacity(), this._float += this.mod, 
-                this._float < -.1 ? this.mod = Math.min(this.mod + .01, .2) : this._float >= .1 && (this.mod = Math.max(this.mod + -.01, -.2)));
-            }
-        } ]), t;
-    }(Sprite);
-}, /* 2 */
-/***/
-function(e, t, n) {
-    /*:
- * @plugindesc Allow an event to have an icon hovering over it.
- *
- * @author Adam Balan
- *
- * @help
- *
- * Place: <eventIcon: icon_id> in a comment on a page for an event.
- *
- * When the event is being interacted with, the event will make the icon
- * lose its opacity. If the page changes and there is a new <eventIcon: icon_id>
- * on that new page, once the event is done being interacted with the icon will
- * appear and change.
- *
- * If the page changes and there is no <eventIcon: icon_id>, the icon will
- * disapear from the event.
- */
-    var r = n(1), o = n(0);
-    /**
- * Global Object - Don't touch.
- *
- * Used to hold global variables, functions and such that are used across
- * the lucid scripts
- */
-    window.lucidScripts = window.lucidScripts || {}, // Used to refresh the event icon.
-    lucidScripts.lucidEventIcon = {
-        needRefresh: !1,
-        recreateMapIcons: !1
-    }, // Self executing Function
-    function() {
-        /**
-   * Add a inidicator and set it to visible.
-   */
-        var e = Game_System.prototype.initialize;
-        Game_System.prototype.initialize = function() {
-            e.call(this), lucidScripts.lucidEventIcon.needRefresh = !0;
-        };
-        /**
-   * Instantiate a new class which sets either true or false for
-   * refreshing the icon.
-   *
-   * @param {number} mapId - the map id
-   */
-        var t = Game_Map.prototype.requestRefresh;
-        Game_Map.prototype.requestRefresh = function(e) {
-            t.call(this, e), lucidScripts.lucidEventIcon.needRefresh = !0;
-        };
-        var n = Spriteset_Map.prototype.createLowerLayer;
-        Spriteset_Map.prototype.createLowerLayer = function() {
-            n.call(this), this.createActionIconSprite();
-        }, /**
-   * New function on the Spriteset_Map class to create the icon sprites.
-   *
-   * @return {undefined} nothing
-   */
-        Spriteset_Map.prototype.createActionIconSprite = function() {
-            var e = new o();
-            e.getAllEventIcons().forEach(function(t) {
-                this["_eventiconSprite_" + t.event_id] = new r(e, t), this._tilemap.addChild(this["_eventiconSprite_" + t.event_id]);
-            }, this);
-        };
-    }();
-}, /* 3 */
 /***/
 function(e, t, n) {
     "use strict";
@@ -598,7 +353,7 @@ ARG = KEY : VAL | VAL
         value: !0
     }), t.extractFirst = t._tokenize = void 0, t.parse = d, t.extractAll = y, t.extractFirstOfType = m, 
     t.extractAllOfType = _;
-    var S = n(4), E = (0, S.regex)("BRA", /</), T = (0, S.regex)("KET", />/), w = (0, 
+    var S = n(1), E = (0, S.regex)("BRA", /</), T = (0, S.regex)("KET", />/), w = (0, 
     S.skip)((0, S.regex)("WHITESPACE", /\s+/)), O = (0, S.regex)("IDENTIFIER", /[a-zA-Z_][a-zA-Z0-9-_]*/), k = (0, 
     S.regex)("KEY", /[a-zA-Z_][a-zA-Z0-9-_]*/), x = (0, S.regex)("KEYVALSEP", /:/), A = ((0, 
     S.seq)(k, (0, S.optional)(w), x), (0, S.regex)("SLASH", /\//)), M = (0, S.regex)("SIGNIFICANT_WHITESPACE", /\s+/), R = (0, 
@@ -627,7 +382,7 @@ ARG = KEY : VAL | VAL
     }, t.extractFirst = g(function() {
         return !0;
     });
-}, /* 4 */
+}, /* 1 */
 /***/
 function(e, t, n) {
     "use strict";
@@ -863,5 +618,247 @@ function(e, t, n) {
     // tokens - an array of tokens generated by the lexer; may be empty
     // newCharacterStream - a new character stream for the next lexer
     t.Token = o;
+}, /* 2 */
+/***/
+function(e, t, n) {
+    function r(e, t) {
+        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+    }
+    var o = function() {
+        function e(e, t) {
+            for (var n = 0; n < t.length; n++) {
+                var r = t[n];
+                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), 
+                Object.defineProperty(e, r.key, r);
+            }
+        }
+        return function(t, n, r) {
+            return n && e(t.prototype, n), r && e(t, r), t;
+        };
+    }(), i = n(0).extractAll;
+    /**
+ * Process all event icons on the map.
+ *
+ */
+    e.exports = function() {
+        function e() {
+            r(this, e);
+        }
+        return o(e, [ {
+            key: "getAllEventIcons",
+            /**
+     * Responsible for getting all event icons for a given map and all its events.
+     *
+     * @return {array} - array of objects.
+     */
+            value: function() {
+                var e = [];
+                // Loop over the events.
+                return $gameMap._events.forEach(function(t) {
+                    if (void 0 !== t) // Loop over the event page count
+                    for (var n = t.page().list.length, r = 0; r < n; r++) // If the event code is a comment.
+                    if (108 === t.page().list[r].code) {
+                        // get the icon assuming there is a tag that matches:
+                        var o = i(t.page().list[r].parameters[0]);
+                        o.length > 0 && // Create the icon object with event id and icon id.
+                        e.push({
+                            event_id: o[0].event || t._eventId,
+                            icon_id: Number(o[0].icon)
+                        });
+                    }
+                }), e;
+            }
+        }, {
+            key: "getEventIcon",
+            value: function(e) {
+                for (var t = $gameMap.event(e), n = t.page().list.length, r = 0; r < n; r++) {
+                    if (108 === t.page().list[r].code) {
+                        var o = i(t.page().list[r].parameters[0]);
+                        return o.length > 0 ? {
+                            event_id: t._eventId,
+                            icon_id: Number(o[0].icon)
+                        } : {
+                            event_id: t._eventId,
+                            icon_id: 0
+                        };
+                    }
+                    return {
+                        event_id: t._eventId,
+                        icon_id: 0
+                    };
+                }
+            }
+        } ]), e;
+    }();
+}, /* 3 */
+/***/
+function(e, t, n) {
+    function r(e, t) {
+        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+    }
+    function o(e, t) {
+        if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+        return !t || "object" != typeof t && "function" != typeof t ? e : t;
+    }
+    function i(e, t) {
+        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
+        e.prototype = Object.create(t && t.prototype, {
+            constructor: {
+                value: e,
+                enumerable: !1,
+                writable: !0,
+                configurable: !0
+            }
+        }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+    }
+    var a = function() {
+        function e(e, t) {
+            for (var n = 0; n < t.length; n++) {
+                var r = t[n];
+                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), 
+                Object.defineProperty(e, r.key, r);
+            }
+        }
+        return function(t, n, r) {
+            return n && e(t.prototype, n), r && e(t, r), t;
+        };
+    }(), c = function e(t, n, r) {
+        null === t && (t = Function.prototype);
+        var o = Object.getOwnPropertyDescriptor(t, n);
+        if (void 0 === o) {
+            var i = Object.getPrototypeOf(t);
+            return null === i ? void 0 : e(i, n, r);
+        }
+        if ("value" in o) return o.value;
+        var a = o.get;
+        if (void 0 !== a) return a.call(r);
+    }, u = n(2);
+    /**
+ * Event prite Icon.
+ *
+ * Responsible for creating the icon above the event.
+ *
+ * Sprite is apart of Rpg Maker MV Library.
+ */
+    e.exports = function(e) {
+        function t(e, n) {
+            r(this, t);
+            var i = o(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this));
+            return i.eventIconDetails = n, i.mapEventsIcons = e, i;
+        }
+        /**
+   * Called when the class is regsitered.
+   *
+   * We also make call to the Sprite initialize method.
+   *
+   * @return {undefined} - nothing
+   */
+        return i(t, e), a(t, [ {
+            key: "initialize",
+            value: function() {
+                c(t.prototype.__proto__ || Object.getPrototypeOf(t.prototype), "initialize", this).call(this), 
+                $gamePlayer.actionIconTarget = $gamePlayer.actionIconTarget || {
+                    event_id: 0,
+                    icon_id: 0
+                }, this._iconIndex = 0, this.z = 100, this.changeBitmap($gamePlayer.actionIconTarget), 
+                this._tileWidth = $gameMap.tileWidth(), this._tileHeight = $gameMap.tileHeight(), 
+                this._offsetX = -Window_Base._iconWidth / 2, this._offsetY = -38, this.anchor.y = 1, 
+                this._float = .1, this.mod = .2, this.mapEventsIcons = new u(), lucidScripts.lucidEventIcon.needRefresh = !0;
+            }
+        }, {
+            key: "changeBitmap",
+            value: function(e) {
+                e.event_id <= 0 ? this._iconIndex = 0 : this._iconIndex = e.icon_id;
+                var t = Window_Base._iconWidth, n = Window_Base._iconHeight, r = this._iconIndex % 16 * t, o = Math.floor(this._iconIndex / 16) * n, i = ImageManager.loadSystem("IconSet");
+                this.bitmap = new Bitmap(t, n), this.bitmap.blt(i, r, o, t, n, 0, 0), this.scale.y = .1, 
+                this.opacity = 0, this.mod = .2, this._float = .1, lucidScripts.lucidEventIcon.needRefresh = !1;
+            }
+        }, {
+            key: "updateOpacity",
+            value: function() {
+                $gameMap.isEventRunning() && $gameMap._interpreter.eventId() === this.eventIconDetails.event_id ? this.opacity -= 40 : this.opacity = 255;
+            }
+        }, {
+            key: "update",
+            value: function() {
+                c(t.prototype.__proto__ || Object.getPrototypeOf(t.prototype), "update", this).call(this), 
+                // Always update the icon.
+                this.eventIconDetails = this.mapEventsIcons.getEventIcon(this.eventIconDetails.event_id), 
+                // Refresh the map to show all icons.
+                $gameMap.requestRefresh(), lucidScripts.lucidEventIcon.needRefresh && void 0 !== this.eventIconDetails && ($gamePlayer.actionIconTarget = this.eventIconDetails), 
+                //console.log(this._iconIndex, $gamePlayer.actionIconTarget.icon_id);
+                this._iconIndex !== $gamePlayer.actionIconTarget.icon_id && this.changeBitmap($gamePlayer.actionIconTarget), 
+                this._iconIndex <= 0 || (this.x = $gameMap.event($gamePlayer.actionIconTarget.event_id).screenX() + this._offsetX, 
+                this.y = $gameMap.event($gamePlayer.actionIconTarget.event_id).screenY() + this._offsetY + this._float, 
+                this.scale.y = Math.min(this.scale.y + .1, 1), this.updateOpacity(), this._float += this.mod, 
+                this._float < -.1 ? this.mod = Math.min(this.mod + .01, .2) : this._float >= .1 && (this.mod = Math.max(this.mod + -.01, -.2)));
+            }
+        } ]), t;
+    }(Sprite);
+}, /* 4 */
+, /* 5 */
+/***/
+function(e, t, n) {
+    /*:
+ * @plugindesc Allow an event to have an icon hovering over it.
+ *
+ * @author Adam Balan
+ *
+ * @help
+ *
+ * Place: <eventIcon: icon_id> in a comment on a page for an event.
+ *
+ * When the event is being interacted with, the event will make the icon
+ * lose its opacity. If the page changes and there is a new <eventIcon: icon_id>
+ * on that new page, once the event is done being interacted with the icon will
+ * appear and change.
+ *
+ * If the page changes and there is no <eventIcon: icon_id>, the icon will
+ * disapear from the event.
+ */
+    var r = n(3), o = n(2);
+    /**
+ * Global Object - Don't touch.
+ *
+ * Used to hold global variables, functions and such that are used across
+ * the lucid scripts
+ */
+    window.lucidScripts = window.lucidScripts || {}, // Used to refresh the event icon.
+    lucidScripts.lucidEventIcon = {
+        needRefresh: !1,
+        recreateMapIcons: !1
+    }, // Self executing Function
+    function() {
+        /**
+   * Add a inidicator and set it to visible.
+   */
+        var e = Game_System.prototype.initialize;
+        Game_System.prototype.initialize = function() {
+            e.call(this), lucidScripts.lucidEventIcon.needRefresh = !0;
+        };
+        /**
+   * Instantiate a new class which sets either true or false for
+   * refreshing the icon.
+   *
+   * @param {number} mapId - the map id
+   */
+        var t = Game_Map.prototype.requestRefresh;
+        Game_Map.prototype.requestRefresh = function(e) {
+            t.call(this, e), lucidScripts.lucidEventIcon.needRefresh = !0;
+        };
+        var n = Spriteset_Map.prototype.createLowerLayer;
+        Spriteset_Map.prototype.createLowerLayer = function() {
+            n.call(this), this.createActionIconSprite();
+        }, /**
+   * New function on the Spriteset_Map class to create the icon sprites.
+   *
+   * @return {undefined} nothing
+   */
+        Spriteset_Map.prototype.createActionIconSprite = function() {
+            var e = new o();
+            e.getAllEventIcons().forEach(function(t) {
+                this["_eventiconSprite_" + t.event_id] = new r(e, t), this._tilemap.addChild(this["_eventiconSprite_" + t.event_id]);
+            }, this);
+        };
+    }();
 } ]);
->>>>>>> b61f4e24e4bb97491a1ec3688c057284de885754
