@@ -17,16 +17,15 @@ module.exports = class ProcessState {
         amount: stateInfo.amount,
         action: stateInfo.action
       });
+
     });
 
     return stateObjects;
   }
 
-
-
   applyStatChanges(stateObjects, actor) {
     stateObjects.forEach(function(stateInfo) {
-      paramId = getParamId(stateInfo.stat);
+      let paramId = getParamId(stateInfo.stat);
       let newValue = 0;
 
       if (stateInfo.action === 'increase') {
@@ -42,14 +41,17 @@ module.exports = class ProcessState {
   }
 
   removeStateChanges(stateObjects, actor) {
+    let newValue = 0;
+
     stateObjects.forEach(function(stateInfo) {
-      paramId = getParamId(stateInfo.stat);
+
+      let paramId = getParamId(stateInfo.stat);
 
       if (stateInfo.action === 'increase') {
-        newValue = actor.param(paramId) * (1 - (stateInfo.amount / 100));
+        newValue = actor.param(paramId) / (1 + (stateInfo.amount / 100));
         actor.subtractParam(paramId, Math.round(newValue - actor.param(paramId)));
       } else if (stateInfo.action === 'decrease') {
-        newValue = actor.param(paramId) * (1 + (stateInfo.amount / 100));
+        newValue = actor.param(paramId) / (1 - (stateInfo.amount / 100));
         actor.addParam(paramId, Math.round(newValue - actor.param(paramId)));
       } else {
         throw Error('type for the tag param must be increase or decrease.');
