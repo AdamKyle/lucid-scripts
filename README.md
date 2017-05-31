@@ -17,7 +17,11 @@ To compile the scripts run `build:all:dev` for development or `build:all` for pr
 > ATTN!
 >
 > `build:all` should be run before making commits and PR's
-> `build:all:dev` is only for your development purposes and testing ther script.
+> `build:all:dev` is only for your development purposes and testing the script.
+
+When you run `build:all` to submit a PR, you must copy the contents of header to the `dist/filename.js`
+and place it ABOVE all the JS. This allows Rpg Maker MV to use these comments for people when installing
+the plugin.
 
 ## Submitting Bugs
 
@@ -53,3 +57,21 @@ Enable the script and place: `<actionIcon: iconId>` in your event in a new comme
 ### Screen Shot:
 
 ![Imgur](http://i.imgur.com/Litg1XM.png)
+
+### Lucid States
+
+Lucid states allows you to create states with note tags that increase or decrease core stats by a percentage.
+
+For example, placing: `<state stat: 'def' amount: x%, action: 'increase/decrease'>` and altering it to: `<state stat: 'def' amount: 10 action: 'increase'>` will increase the defence stat of that player or enemy effected by 10%.
+
+#### How to Use:
+
+Place the script in your plugins section.
+
+Enable the script and place: `<state stat: 'def' amount: x%, action: 'increase/decrease'>` in your state note box.
+
+Multiple state note tags can be used on the same event.
+
+### Screen Shot:
+
+None to show.
