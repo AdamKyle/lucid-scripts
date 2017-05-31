@@ -9,4 +9,5 @@
  *
  * stat: which stat should we increase?
  * amount: the percentage in a decimal form, eg: 0.01 is 1%
+ * action: increase or decrease by the amount set.
  */
