@@ -21,17 +21,20 @@ module.exports = class MapEventsIcons {
 
         // Loop over the event page count
         for (let i = 0; i < eventPageCount; i++) {
-          // If the event code is a comment.
-          if (event.page().list[i].code === 108) {
-            // get the icon assuming there is a tag that matches:
-            const iconEventInfo = extractAll(event.page().list[i].parameters[0]);
+          // In some cases the event can be null.
+          if (event !== null) {
+            // If the event code is a comment.
+            if (event.page().list[i].code === 108) {
+              // get the icon assuming there is a tag that matches:
+              const iconEventInfo = extractAll(event.page().list[i].parameters[0]);
 
-            if (iconEventInfo.length > 0) {
-              // Create the icon object with event id and icon id.
-              eventIconObjects.push({
-                event_id: iconEventInfo[0].event || event._eventId,
-                icon_id: Number(iconEventInfo[0].icon)
-              });
+              if (iconEventInfo.length > 0) {
+                // Create the icon object with event id and icon id.
+                eventIconObjects.push({
+                  event_id: iconEventInfo[0].event || event._eventId,
+                  icon_id: Number(iconEventInfo[0].icon)
+                });
+              }
             }
           }
         }
