@@ -9,8 +9,12 @@
   "scripts": {
     "eslint": "./node_modules/.bin/eslint ./src",
     "webpack": "./node_modules/.bin/webpack",
-    "build:all": "eslint src && webpack -p --optimize-minimize && cp ./build/* dist/ && rm -rf build/*",
-    "build:all:dev": "eslint src && webpack"
+    "clean:dist": "rm -rf dist/*.js",
+    "clean:build": "rm -rf build/*",
+    "copy:build-to-dist": "cp ./build/* dist/",
+    "create:header": "./bin/create_header.js",
+    "build:all": "yarn clean:dist && eslint src && webpack -p --optimize-minimize && yarn copy:build-to-dist && yarn clean:build && yarn create:header",
+    "build:all:dev": "yarn clean:build && eslint src && webpack"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
@@ -26,5 +30,8 @@
     "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "^2.1.0"
+  },
+  "dependencies": {
+    "prepend-file": "^1.3.1"
   }
 }

@@ -1,5 +1,5 @@
 /*:
- * @plugindesc Allow states to directly affect certian stats
+ * @plugindesc Allow states to directly affect certain stats
  *
  * @author Adam Balan
  *

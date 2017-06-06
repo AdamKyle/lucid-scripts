@@ -12,16 +12,13 @@ To get started, clone this repository. Either make sure you have [Yarn](https://
 
 Run `yarn` or `npm install` at the root of the cloned directory.
 
-To compile the scripts run `build:all:dev` for development or `build:all` for production.
+To compile the scripts run `yarn/npm run build:all:dev` for development or `yarn/npm run build:all` for production.
 
 > ATTN!
 >
-> `build:all` should be run before making commits and PR's
-> `build:all:dev` is only for your development purposes and testing the script.
+> `yarn/npm run build:all` should be run before making commits and PR's
+> `yarn/npm run build:all:dev` is only for your development purposes and testing the script.
 
-When you run `build:all` to submit a PR, you must copy the contents of header to the `dist/filename.js`
-and place it ABOVE all the JS. This allows Rpg Maker MV to use these comments for people when installing
-the plugin.
 
 ## Submitting Bugs
 
@@ -33,7 +30,9 @@ the plugin.
 
 All scripts are free to use, edit, modify and redistribute according to the license in this repository.
 
-If any script is used in your game, commercial or other wise, I require credit in the credit section. You can credit: *Adam Balan - Lucid Scripts*
+If any script is used in your game, commercial or other wise, I require credit in the credit section. You can credit: *Adam Balan - Lucid Scripts (Or Eviticous On The Rpg Maker Forums)*
+
+All scripts come from `./dist`
 
 ### Lucid Icon Event
 

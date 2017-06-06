@@ -3,8 +3,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    lucidEventIcon: './src/lucid/event/icon.js',
-    lucidStates: './src/lucid/states/states.js',
+    LucidEventIcon: './src/lucid/event/icon.js',
+    LucidStates: './src/lucid/states/states.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
