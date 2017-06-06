@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     LucidEventIcon: './src/lucid/event/icon.js',
     LucidStates: './src/lucid/states/states.js',
+    LucidExperiencePoints: './src/lucid/experience_points/experience.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),

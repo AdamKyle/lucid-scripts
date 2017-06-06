@@ -35,6 +35,13 @@ If any script is used in your game, commercial or other wise, I require credit i
 
 All scripts come from `./dist`
 
+# List Of Scripts
+
+- [Lucid Icon Event](#lucid-icon-event)
+- [Lucid States](#lucid-states)
+- [Lucid Experience Points](#lucid-experience-points)
+
+
 ### Lucid Icon Event
 
 Lucid Event Icon allows you to position an icon above the event. The icon will "float" above the event and when interacted with, the event that is, the icon will fade out.
@@ -54,7 +61,7 @@ Place the script in your plugins section.
 
 Enable the script and place: `<actionIcon: iconId>` in your event in a new comment.
 
-### Screen Shot:
+#### Screen Shot:
 
 ![Imgur](http://i.imgur.com/Litg1XM.png)
 
@@ -72,6 +79,38 @@ Enable the script and place: `<state stat: 'def' amount: x%, action: 'increase/d
 
 Multiple state note tags can be used on the same event.
 
-### Screen Shot:
+#### Screen Shot:
 
 None to show.
+
+### Lucid Experience Points
+
+Lucid Experience Points allows you to define a custom formula for your characters experience points, based on a note tag place in the class notes section.
+
+For example: `<expFormula: "level + 500 * pow(level, 6)">` would evaluate to: `(level + (500 * pow(level, 6))` which is then replaced by appropriate values.
+
+Level in this case is replaced by the characters next level, to calculate needed xp.
+
+You have access to the following for your EXP formulas:
+
+- **level**: This is a variable thats replaced by the actual level.
+- **pow(x, y)**: x to the power of y.
+- **exp x**: Exponential x, also known as e^x.
+- **ceil x**: The ceiling of x.
+- **floor x**: The floor of x.
+- **round x**: Round the value of X either up or down.
+
+For example, a formula that uses all of these would look like:
+
+```
+<expFormula: "round (level + 500 * pow(level, 6) + exp level +
+  ceil (1000 * 1.18) - 100 + floor (1000 * 1.18))">
+```
+
+You can have formulas as simple as: `<expFormula: 100>`, this means that no
+matter the level you will always need 100 exp to gain the next level. The
+formula will scale based on your level, but specific values will not.
+
+#### Screen Shot:
+
+None To Show

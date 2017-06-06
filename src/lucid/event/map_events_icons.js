@@ -16,7 +16,7 @@ module.exports = class MapEventsIcons {
 
     // Loop over the events.
     $gameMap._events.forEach((event) => {
-      if (event !== undefined) {
+      if (event !== undefined && event !== null) {
         let eventPageCount = event.page().list.length;
 
         // Loop over the event page count
