@@ -75,10 +75,7 @@ Game_Actor.prototype.levelUp = function() {
     return lucidExperiencePoints_GameActor_LevelUp.call(this);
   }
 
-  if (!isNaN(currentClassNote[0].expFormula)) {
-    lucidExperiencePoints_GameActor_LevelUp.call(this);
-    this._exp[this._classId] = 0;
-  } else {
-    return lucidExperiencePoints_GameActor_LevelUp.call(this);
-  }
+  // Set the EXP to 0, when we level up.
+  lucidExperiencePoints_GameActor_LevelUp.call(this);
+  this._exp[this._classId] = 0;
 };
