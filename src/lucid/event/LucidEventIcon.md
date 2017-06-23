@@ -1,6 +1,5 @@
 /*:
  * @plugindesc Allows multiple events to have different icons all at the same time.
- *
  * @author Eviticous
  *
  * @help

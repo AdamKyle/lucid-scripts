@@ -1,6 +1,5 @@
 /*:
  * @plugindesc Allow you to set your Own EXP for each class.
- *
  * @author Eviticous
  *
  * @help

@@ -122,9 +122,9 @@ Allows you to merge, store and recover inventories for various parties.
 You have three functions to work with and one option that has to be set.
 
 ```js
-lucidScripts.lucidInventory.separate(partyIndex)
-lucidScripts.lucidInventory.recover(partyIndex)
-lucidScripts.lucidInventory.merge(partyIndex)
+LucidInventory.separate(partyIndex)
+LucidInventory.recover(partyIndex)
+LucidInventory.merge(partyIndex)
 ```
 
 The option is `parties` which is an array of arrays containing actor id's
@@ -133,7 +133,7 @@ which represent parties. Example: `[[1, 2], [3, 4]]`
 #### Separating, recovering and Merging Inventory
 
 In the game editor, before you remove party members 1 and 2 and then add 3 and 4,
-you would call `lucidScripts.lucidInventory.separate(0)`. This states that
+you would call `LucidInventory.separate(0)`. This states that
 we store the first parties inventory aside, before switching removing people.
 
 This includes weapons, amor and items not equipped.
@@ -148,14 +148,14 @@ and index of 1.
 > of actors 1 and 2 is 0, the second is 1 and so on.
 
 Now that you have separate party 1 and 2's items, we need to recover party
-1's inventory, so we do: `lucidScripts.lucidInventory.recover(0)` AFTER adding
+1's inventory, so we do: `LucidInventory.recover(0)` AFTER adding
 the party members for party 1.
 
 What happens if the two parties meet up and join? Lets say party 2 joins party one
 and party 2 has items and weapons and armour.
 
 You would add actors 3 and 4 to your party containing actors 1 and 2 and then
-call: `lucidScripts.lucidInventory.merge(1)` which will merge party twos items with
+call: `LucidInventory.merge(1)` which will merge party twos items with
 party one.
 
 > ## ATTN!
