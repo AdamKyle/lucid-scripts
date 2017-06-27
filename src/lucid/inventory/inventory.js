@@ -20,13 +20,15 @@ class LucidInventory {
     lucidScripts.lucidInventory.inventory[partyIndex] = {
       items: $gameParty._items,
       weapons: $gameParty._weapons,
-      armors: $gameParty._armors
+      armors: $gameParty._armors,
+      gold: $gameParty._gold
     };
 
     // Remove everything from the inventory.
     $gameParty._items = {};
     $gameParty._weapons = {};
     $gameParty._armors = {};
+    $gameParty._gold = 0;
   }
 
   /**
@@ -43,6 +45,7 @@ class LucidInventory {
     $gameParty._items = storedInventory.items;
     $gameParty._weapons = storedInventory.weapons;
     $gameParty._armors = storedInventory.armors;
+    $gameParty._gold = storedInventory.gold;
   }
 
   /**
@@ -61,6 +64,7 @@ class LucidInventory {
     this.mergeItems(storedInventory.items);
     this.mergeWeapons(storedInventory.weapons);
     this.mergeArmors(storedInventory.armors);
+    $gameParty._gold += storedInventory.gold;
   }
 
   /**
