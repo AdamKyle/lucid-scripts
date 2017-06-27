@@ -22,7 +22,7 @@
     "no-empty-function": 1,
     "max-lines": [2, {"max": 300}],
     "max-nested-callbacks": [2, {"max": 3}],
-    "max-params": [2, {"max": 4}],
+    "max-params": [2, {"max": 8}],
     "no-undef": 0
   }
 }

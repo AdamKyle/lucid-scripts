@@ -10,6 +10,8 @@
  *
  * Must give credit. Can be used in commercial Games.
  *
+ * Compatibility: ???? 
+ *
  * Allows you to have inventories for each set of party members, which
  * is represented by an array of arrays. For example:
  *
