@@ -110,15 +110,28 @@ Game_Battler.prototype.removeState = function(stateId) {
      this.refresh();
  };
 
-/**
- * We want to keep the states that the player might already have attached to them.
- *
- * @return {undefined} nothing
- */
-const LucidStates_Game_BattlerBase_clearStates = Game_BattlerBase.prototype.clearStates;
- Game_BattlerBase.prototype.clearStates = function() {
-    LucidStates_Game_BattlerBase_clearStates.call(this);
-    this._states = lucidScripts.lucidStatesToKeep;
+ /**
+  * We over write this method in order to make the actor retain the states
+  * that we want. Assuming said states are applied to the actor.
+  *
+  * -- RECOVER ALL --
+  *
+  * @return {bool} true
+  */
+ Game_Interpreter.prototype.command314 = function() {
+    this.iterateActorEx(this._params[0], this._params[1], function(actor) {
+        const tempActor =  JsonEx.makeDeepCopy(actor);
+        actor.recoverAll();
+
+        if (lucidScripts.lucidStatesToKeep.length > 0) {
+          lucidScripts.lucidStatesToKeep.forEach((stateToKeep) => {
+            if (tempActor.isStateAffected(stateToKeep)) {
+              actor.addState(stateToKeep);
+            }
+          });
+        }
+    }.bind(this));
+    return true;
 };
 
  /**
