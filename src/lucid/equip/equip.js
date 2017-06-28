@@ -19,66 +19,16 @@ lucidScripts.lucidEquiped = {};
     this.refresh();
  };
 
+const LucidEquip_Game_Actor_forceChangeEquip = Game_Actor.prototype.forceChangeEquip;
+ Game_Actor.prototype.forceChangeEquip = function(slotId, item) {
+    changeEquipment(item, slotId, this);
+    LucidEquip_Game_Actor_forceChangeEquip.call(this, slotId, item);
+};
+
 const LucidEquip_Game_Actor_changeEquip = Game_Actor.prototype.changeEquip;
 Game_Actor.prototype.changeEquip = function(slotId, item) {
     LucidEquip_Game_Actor_changeEquip.call(this, slotId, item);
-
-    const equipTags = new EquipTags();
-    const tagObject = equipTags.getTags(item);
-
-    if (item !== null) {
-
-      createContainer(this);
-
-      if (lucidScripts.lucidEquiped[this._actorId].length === 0) {
-        lucidScripts.lucidEquiped[this._actorId].push({
-          item: item,
-          slotId: slotId
-        });
-
-        if (tagObject !== null) {
-          equipTags.applyStatChanges(tagObject, this);
-        }
-      } else {
-        const index = findEquipedItemIndex(slotId, this._actorId);
-          if (index !== -1) {
-            replaceItemAtIndex(this, index, item, equipTags)
-          } else {
-            lucidScripts.lucidEquiped[this._actorId].push({
-              item: item,
-              slotId: slotId
-            });
-
-            if (tagObject !== null) {
-              equipTags.applyStatChanges(tagObject, this);
-            }
-          }
-      }
-    } else {
-      if (Object.keys(lucidScripts.lucidEquiped).length === 0) {
-        return;
-      }
-
-      if (lucidScripts.lucidEquiped[this._actorId] === undefined) {
-        return;
-      }
-
-      const index = findEquipedItemIndex(slotId, this._actorId);
-
-      if (index === -1) {
-        return;
-      }
-
-      const oldItem = lucidScripts.lucidEquiped[this._actorId][index].item;
-      const oldTag = equipTags.getTags(oldItem);
-
-      if (oldTag !== null) {
-        equipTags.removeStateChanges(oldTag, this);
-      }
-
-      lucidScripts.lucidEquiped[this._actorId] = [];
-      loadPreEquiped();
-    }
+    changeEquipment(item, slotId, this);
 };
 
 const LucidEquip_DataManager_setupNewGame = DataManager.setupNewGame;
@@ -86,6 +36,73 @@ DataManager.setupNewGame = function() {
   LucidEquip_DataManager_setupNewGame.call(this);
   loadPreEquiped(true);
 };
+
+/**
+ * Applies or removes stat increase/decrease when equipment is changed.
+ *
+ * @param {obj} item - The item object
+ * @param {int} slotId - The slot id
+ * @param {obj} actor - The actor
+ * @return {undefined} nothing
+ */
+const changeEquipment = function(item, slotId, actor) {
+  const equipTags = new EquipTags();
+  const tagObject = equipTags.getTags(item);
+
+  if (item !== null) {
+
+    createContainer(actor);
+
+    if (lucidScripts.lucidEquiped[actor._actorId].length === 0) {
+      lucidScripts.lucidEquiped[actor._actorId].push({
+        item: item,
+        slotId: slotId
+      });
+
+      if (tagObject !== null) {
+        equipTags.applyStatChanges(tagObject, actor);
+      }
+    } else {
+      const index = findEquipedItemIndex(slotId, actor._actorId);
+        if (index !== -1) {
+          replaceItemAtIndex(actor, index, item, equipTags)
+        } else {
+          lucidScripts.lucidEquiped[actor._actorId].push({
+            item: item,
+            slotId: slotId
+          });
+
+          if (tagObject !== null) {
+            equipTags.applyStatChanges(tagObject, actor);
+          }
+        }
+    }
+  } else {
+    if (Object.keys(lucidScripts.lucidEquiped).length === 0) {
+      return;
+    }
+
+    if (lucidScripts.lucidEquiped[actor._actorId] === undefined) {
+      return;
+    }
+
+    const index = findEquipedItemIndex(slotId, actor._actorId);
+
+    if (index === -1) {
+      return;
+    }
+
+    const oldItem = lucidScripts.lucidEquiped[actor._actorId][index].item;
+    const oldTag = equipTags.getTags(oldItem);
+
+    if (oldTag !== null) {
+      equipTags.removeStateChanges(oldTag, actor);
+    }
+
+    lucidScripts.lucidEquiped[actor._actorId] = [];
+    loadPreEquiped();
+  }
+}
 
 /**
  * Replace the item at the index.
