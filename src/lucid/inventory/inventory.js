@@ -142,7 +142,7 @@ const LucidInventory_DataManager_makeSaveContents = DataManager.makeSaveContents
 DataManager.makeSaveContents = function() {
   // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
   var contents = LucidInventory_DataManager_makeSaveContents.call(this);
-  contents.lucidScripts = {};
+  contents.lucidScripts = contents.lucidScripts || {};
 
   contents.lucidScripts.lucidInventory = lucidScripts.lucidInventory;
   return contents;

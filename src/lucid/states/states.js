@@ -105,6 +105,7 @@ Game_Battler.prototype.removeState = function(stateId) {
  * @return {undefined} nothing
  */
  Game_BattlerBase.prototype.subtractParam = function(paramId, value) {
+      // This number coming back will be a negative number.
      this._paramPlus[paramId] += value;
      this.refresh();
  };
@@ -127,7 +128,7 @@ const LucidStates_Game_BattlerBase_clearStates = Game_BattlerBase.prototype.clea
  DataManager.makeSaveContents = function() {
    // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
    var contents = LucidStates_DataManager_makeSaveContents.call(this);
-   contents.lucidScripts = {};
+   contents.lucidScripts = contents.lucidScripts || {};
 
    contents.lucidScripts.lucidStatesToKeep = lucidScripts.lucidStatesToKeep;
    return contents;

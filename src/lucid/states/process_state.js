@@ -1,5 +1,5 @@
 const extractAll = require('rmmv-mrp-core/option-parser').extractAll;
-const getParamId = require('./helpers/get_param_id').getParamId;
+const getParamId = require('../helpers/get_param_id').getParamId;
 
 module.exports = class ProcessState {
 
