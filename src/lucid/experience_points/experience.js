@@ -1,11 +1,6 @@
 const extractAll = require('rmmv-mrp-core/option-parser').extractAll;
 const Parser = require('expr-eval').Parser;
 
-require('string.prototype.includes');
-
-window.lucidScripts = window.lucidScripts || {};
-
-
 /**
  * We completly change the way this leveling works. We can pass in math
  * formulas that allow you to set the exp for the next level.
@@ -25,7 +20,8 @@ Game_Actor.prototype.expForLevel = function(level) {
      return 0;
   }
 
-  // If just a plain number, return it.
+  // If just a plain number, return 0.
+  // Example, if level needed 100 then we can reset to 0.
   if (!isNaN(currentClassNote[0].expFormula)) {
     return 0;
   }
@@ -59,23 +55,4 @@ Game_Actor.prototype.nextLevelExp = function() {
     } else {
       return lucidExperiencePoints_GameActor_NextLevelEXP.call(this);
     }
-};
-
-/**
- * Over ride the default level up, only if the user set a single digit for the
- * formula, for example: 100. This way they only level up once, regardless of
- * how much exp was awarded to them.
- */
-let lucidExperiencePoints_GameActor_LevelUp = Game_Actor.prototype.levelUp;
-Game_Actor.prototype.levelUp = function() {
-  const currentClassNote = extractAll(this.currentClass().note);
-
-  // Not note tag? Use default system.
-  if (currentClassNote.length === 0) {
-    return lucidExperiencePoints_GameActor_LevelUp.call(this);
-  }
-
-  // Set the EXP to 0, when we level up.
-  lucidExperiencePoints_GameActor_LevelUp.call(this);
-  this._exp[this._classId] = 0;
 };

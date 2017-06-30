@@ -17,6 +17,6 @@ module.exports.getParamId = function(param) {
     case "luk":
       return 7
     default:
-      throw Error('Unknown param.');
+      throw Error('Unknown param: ' + param);
   }
 }
