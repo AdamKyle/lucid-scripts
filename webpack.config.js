@@ -4,10 +4,8 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     LucidEventIcon: './src/lucid/event/icon.js',
-    LucidStates: './src/lucid/states/states.js',
     LucidExperiencePoints: './src/lucid/experience_points/experience.js',
-    LucidInventory: './src/lucid/inventory/inventory.js',
-    LucidEquip: './src/lucid/equip/equip.js'
+    LucidInventory: './src/lucid/inventory/inventory.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
