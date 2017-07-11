@@ -118,6 +118,7 @@ module.exports = class EventSpriteIcon extends Sprite {
 
     // Refresh the map to show all icons.
     $gameMap.requestRefresh();
+    console.log('Here');
 
     if (lucidScripts.lucidEventIcon.needRefresh) {
       if (this.eventIconDetails !== undefined) {
@@ -125,7 +126,6 @@ module.exports = class EventSpriteIcon extends Sprite {
       }
     }
 
-    //console.log(this._iconIndex, $gamePlayer.actionIconTarget.icon_id);
     if (this._iconIndex !== $gamePlayer.actionIconTarget.icon_id) {
       this.changeBitmap($gamePlayer.actionIconTarget);
     }
