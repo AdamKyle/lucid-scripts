@@ -40,3 +40,4 @@ All scripts come from `./dist`
 - [Lucid Icon Event](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Icon-Eventt)
 - [Lucid Experience Points](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Experience-Points)
 - [Lucid Conjured Items](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Conjured-Items)
+- [Lucid Icon Size](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Icon-Size)
