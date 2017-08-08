@@ -1,4 +1,4 @@
-const GameObserver = require('rmmv-mrp-core/game-observer');
+const GameObserver = require('rmmv-mrp-core/game-observer').default;
 
 var conjuredItems;
 

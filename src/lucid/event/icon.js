@@ -49,13 +49,10 @@ lucidScripts.lucidEventIcon = { needRefresh: false, recreateMapIcons: false};
    */
   Spriteset_Map.prototype.createActionIconSprite = function() {
     let mapEventsIcons = new MapEventsIcons();
-    const allEventIcons = mapEventsIcons.getAllEventIcons();
-    
-    if (allEventIcons.length > 0) {
-      allEventIcons.forEach(function(eventIcon) {
-        this['_eventiconSprite_' + eventIcon.event_id] = new EventSpriteIcon(mapEventsIcons, eventIcon);
-        this._tilemap.addChild(this['_eventiconSprite_' + eventIcon.event_id]);
-      }, this);
-    }
+
+    mapEventsIcons.getAllEventIcons().forEach(function(eventIcon) {
+      this['_eventiconSprite_' + eventIcon.event_id] = new EventSpriteIcon(mapEventsIcons, eventIcon);
+      this._tilemap.addChild(this['_eventiconSprite_' + eventIcon.event_id]);
+    }, this);
   };
 })();

@@ -125,6 +125,7 @@ module.exports = class EventSpriteIcon extends Sprite {
       }
     }
 
+    //console.log(this._iconIndex, $gamePlayer.actionIconTarget.icon_id);
     if (this._iconIndex !== $gamePlayer.actionIconTarget.icon_id) {
       this.changeBitmap($gamePlayer.actionIconTarget);
     }

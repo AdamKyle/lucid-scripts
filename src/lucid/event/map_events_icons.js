@@ -16,7 +16,7 @@ module.exports = class MapEventsIcons {
 
     // Loop over the events.
     $gameMap._events.forEach((event) => {
-      if (event !== undefined && event !== null && event.page() !== undefined) {
+      if (event !== undefined && event !== null) {
         let eventPageCount = event.page().list.length;
 
         // Loop over the event page count
@@ -32,7 +32,7 @@ module.exports = class MapEventsIcons {
                 // Create the icon object with event id and icon id.
                 eventIconObjects.push({
                   event_id: iconEventInfo[0].event || event._eventId,
-                  icon_id: Number(iconEventInfo[0].icon)
+                  icon_id: Number(iconEventInfo[0].eventIcon)
                 });
               }
             }
@@ -63,7 +63,7 @@ module.exports = class MapEventsIcons {
         let iconEventInfo = extractAll(event.page().list[i].parameters[0]);
 
         if (iconEventInfo.length > 0) {
-          return { event_id: event._eventId, icon_id: Number(iconEventInfo[0].icon) };
+          return { event_id: event._eventId, icon_id: Number(iconEventInfo[0].eventIcon) };
         } else {
           return { event_id: event._eventId, icon_id: 0 }
         }
