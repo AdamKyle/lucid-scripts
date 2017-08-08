@@ -38,7 +38,5 @@ All scripts come from `./dist`
 # List Of Scripts
 
 - [Lucid Icon Event](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Icon-Eventt)
-- [Lucid States](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-States)
 - [Lucid Experience Points](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Experience-Points)
-- [Lucid Inventory](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Inventory)
-- [Lucid Equip](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Equip)
+- [Lucid Conjured Items](https://github.com/AdamKyle/lucid-scripts/wiki/Lucid-Conjured-Items)
